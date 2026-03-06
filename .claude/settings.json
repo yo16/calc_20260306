@@ -1,5 +1,18 @@
 {
   "enabledPlugins": {
     "claude-mem@thedotmack": true
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd D:/Public/github/yo16/calc_20260306 && npx next lint --quiet 2>&1 || true"
+          }
+        ]
+      }
+    ]
   }
 }
