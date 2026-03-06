@@ -18,10 +18,15 @@ PRがリモートdevにマージされた後のクロージング処理。
 ### 2. コーディング内容の要約 → `beads-manager`
 - マージされたfeatureブランチのコミット履歴を確認
 - 実施内容を要約文として作成
+- 追加・変更したテストファイルのパス一覧を含める
 
 ### 3. Beadsタスク更新・クローズ → `beads-manager`
 - featureブランチ名からBeadsIDを特定
 - `bd update <BeadsID> --notes "<要約文>"` でnotesに実施内容を追記
+  - notesには以下を含める:
+    - 実施内容の要約
+    - 追加・変更したファイル一覧
+    - 追加・変更したテストファイル一覧
 - `bd close <BeadsID>` でステータスをdoneに更新
 
 ### 4. ローカルdevへcommit → `git-manager`

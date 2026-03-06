@@ -2,7 +2,15 @@
   "permissions": {
     "allow": [
       "Bash(bd list:*)",
-      "Bash(bd:*)"
+      "Bash(bd:*)",
+      "Bash(npx create-next-app@latest:*)",
+      "Bash(mkdir:*)",
+      "Bash(do touch:*)"
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "playwright",
+    "github",
+    "filesystem"
+  ]
 }
