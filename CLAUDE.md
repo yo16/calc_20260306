@@ -59,24 +59,53 @@ docs/              → ドキュメント
 - タスクIDプレフィックス: `t-`（例: `t-abc`）
 - Beads CLI (`bd`) でタスクを管理する
 - タスクのステータス: `open` → `in_progress` → `done` (または `failed` ラベル付きclose)
+- retryカウントは Beads の notes に `retry_count: N` として記録
 
 ### ブランチ戦略
 - `main` ← `dev` ← `feature/t-xxx` の3階層
 - featureブランチ名は `feature/<BeadsID>`（例: `feature/t-abc`）
 - PRは必ず `feature` → `dev` へ作成する
 - `main` への反映は別途判断する
+- BeadsIDとブランチの変換: `t-abc` ↔ `feature/t-abc`
 
-### エージェント役割分担
-タスク実行時、以下の4つの役割でエージェントを使い分ける:
+### サブエージェント（`.claude/agents/`）
 
-1. **Beads管理エージェント**: タスクのステータス管理、notes更新、依存関係操作のみ。コードを書かない
-2. **Git/GitHubエージェント**: ブランチ操作、commit、push、PR作成のみ。コードを書かない
-3. **コーディングエージェント**: 仕様に基づくコード実装・修正を行う
-4. **テストエージェント**: テスト実行と結果分析。失敗時は直接修正せず、修正依頼を返す
+タスク実行時、以下の4つのサブエージェントを使い分ける。
+各サブエージェントは `.claude/agents/` に定義されており、Agent toolで委譲する。
 
-### カスタムスキル
-- `/task-start <BeadsID>` : タスク開始（Beads更新 → ブランチ作成 → コーディング → テスト）
-- `/task-fix [エラー内容]` : テスト失敗・レビューNG時の修正ループ（最大3回リトライ）
-- `/task-open-pr` : テスト成功後のPR作成
-- `/task-close` : PRマージ後のクロージング（dev pull → Beads更新 → push）
-- `/task-failed <BeadsID>` : 失敗時の後処理（タスククローズ → 新タスク作成 → 依存関係付け替え）
+| サブエージェント名 | 役割 | 使用可能ツール | 制約 |
+|---|---|---|---|
+| `beads-manager` | タスク管理（ステータス・notes・依存関係） | Bash, Read, Grep, Glob | コードを書かない、git操作しない |
+| `git-manager` | ブランチ・commit・push・PR | Bash, Read, Grep, Glob | コードを書かない |
+| `coder` | コード実装・修正 | Read, Write, Edit, Bash, Grep, Glob | Beads操作しない、git操作しない |
+| `tester` | テスト実行・結果分析 | Read, Bash, Grep, Glob | コードを直接修正しない |
+
+**使用方法**: スキル内の各ステップで `→ <agent名>` と記載されたサブエージェントに委譲する。
+
+### カスタムスキル（`.claude/commands/`）
+
+| コマンド | 引数 | 概要 |
+|---|---|---|
+| `/task-start` | `<BeadsID>` | タスク開始。beads-manager→git-manager→coder→testerの順で実行 |
+| `/task-fix` | `[エラー内容]` | 修正ループ。tester結果→coder修正→tester再実行（最大3回リトライ） |
+| `/task-open-pr` | なし | テスト成功後のPR作成。tester確認→git-managerでcommit・push・PR |
+| `/task-close` | なし | PRマージ後のクロージング。git-managerでpull→beads-managerで要約・close→git-managerでpush |
+| `/task-failed` | `<BeadsID>` | 失敗処理。beads-managerでclose+新タスク作成→git-managerでdevへ戻る |
+
+**典型的なフロー**:
+```
+/task-start t-abc → コーディング・テスト完了 → /task-open-pr → 人間がPRレビュー・マージ → /task-close
+```
+
+**失敗時のフロー**:
+```
+/task-start t-abc → テスト失敗 → /task-fix（自動） → 3回超過 → /task-failed t-abc（自動）
+```
+
+### Hooks（`.claude/settings.json`）
+
+| イベント | マッチャー | 動作 |
+|---|---|---|
+| `PostToolUse` | `Edit\|Write\|NotebookEdit` | コード編集後に `npx next lint` を自動実行 |
+
+lintエラーが発生した場合は `coder` サブエージェントに修正を依頼する。
