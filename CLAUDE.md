@@ -60,6 +60,8 @@ docs/              → ドキュメント
 - Beads CLI (`bd`) でタスクを管理する
 - タスクのステータス: `open` → `in_progress` → `done` (または `failed` ラベル付きclose)
 - retryカウントは Beads の notes に `retry_count: N` として記録
+- **タスク作成時のルール**: descriptionに必ず「テスト観点」を含めること。テスト観点がないタスクは作成しない
+  - テスト観点の例: 正常系テスト、異常系テスト、境界値テスト、エラーハンドリング等
 
 ### ブランチ戦略
 - `main` ← `dev` ← `feature/t-xxx` の3階層
