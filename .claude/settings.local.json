@@ -1,12 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(cd D:/Public/github/yo16/calc_20260306:*)",
-      "Bash(cd /d/Public/github/yo16/calc_20260306:*)",
       "Bash(bd:*)",
-      "Bash(npx create-next-app@latest:*)",
-      "Bash(do touch:*)",
       "Bash(gh pr:*)",
+      "Bash(gh api:*)",
       "Bash(git status)",
       "Bash(git diff:*)",
       "Bash(git branch:*)",
@@ -17,7 +14,6 @@
       "Bash(git push:*)",
       "Bash(git log:*)",
       "Bash(git stash:*)",
-      "Bash(gh pr:*)",
       "Bash(mkdir:*)",
       "Bash(npm install:*)",
       "Bash(npm test:*)",
@@ -26,7 +22,12 @@
       "Bash(npm run start:*)",
       "Bash(npm run dev:*)",
       "Bash(npx jest:*)",
-      "Bash(gh api:*)"
+      "Bash(echo $GITHUB_TOKEN)",
+      "Bash(npx next:*)",
+      "Bash(npx --prefix D:/Public/github/yo16/calc_20260306 next lint 2>&1 | head -30)",
+      "Bash(npx eslint:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm ls:*)"
     ]
   },
   "enabledMcpjsonServers": [
