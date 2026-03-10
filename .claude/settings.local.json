@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd D:/Public/github/yo16/calc_20260306:*)",
+      "Bash(cd /d/Public/github/yo16/calc_20260306:*)",
+      "Bash(bd:*)",
+      "Bash(npx create-next-app@latest:*)",
+      "Bash(do touch:*)",
+      "Bash(cd /d/Public/github/yo16/calc_20260306 && gh pr:*)",
+      "Bash(cd /d/Public/github/yo16/calc_20260306 && git status)",
+      "Bash(cd /d/Public/github/yo16/calc_20260306 && git diff:*)",
+      "Bash(cd /d/Public/github/yo16/calc_20260306 && git branch:*)",
+      "Bash(cd /d/Public/github/yo16/calc_20260306 && git checkout:*)",
+      "Bash(cd /d/Public/github/yo16/calc_20260306 && git add:*)",
+      "Bash(cd /d/Public/github/yo16/calc_20260306 && git commit:*)",
+      "Bash(cd /d/Public/github/yo16/calc_20260306 && git pull:*)",
+      "Bash(cd /d/Public/github/yo16/calc_20260306 && git push:*)",
+      "Bash(cd /d/Public/github/yo16/calc_20260306 && git log:*)",
+      "Bash(cd /d/Public/github/yo16/calc_20260306 && git stash:*)",
+      "Bash(cd /d/Public/github/yo16/calc_20260306 && mkdir:*)",
+      "Bash(npm install:*)",
+      "Bash(npm test:*)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run start:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npx jest:*)",
+      "Bash(npx next:*)",
+      "Bash(npx eslint:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm ls:*)"
+    ]
+  },
+  "enabledMcpjsonServers": [
+    "playwright",
+    "github",
+    "filesystem"
+  ]
+}
