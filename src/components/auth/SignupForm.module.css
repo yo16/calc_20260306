@@ -1,148 +1,134 @@
+/* ============================================
+   サインアップフォームスタイル
+   グローバルCSS変数を使用してテーマ整合性を確保
+   ============================================ */
+
+/* フォームコンテナ: 画面中央に配置 */
 .container {
   display: flex;
-  min-height: 100vh;
+  min-height: calc(100vh - var(--header-height) - var(--footer-height) - var(--spacing-lg) * 2);
   align-items: center;
   justify-content: center;
-  font-family: var(--font-geist-sans);
-  background-color: var(--background);
+  font-family: var(--font-sans);
 }
 
+/* フォーム本体: カードスタイル */
 .form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--spacing-md);
   width: 100%;
   max-width: 400px;
-  padding: 40px;
-  background-color: var(--foreground, #fff);
-  border-radius: 8px;
+  padding: var(--spacing-2xl) var(--spacing-xl);
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
 }
 
+/* フォームタイトル */
 .title {
-  font-size: 24px;
+  font-size: var(--font-size-2xl);
   font-weight: 600;
   text-align: center;
-  margin-bottom: 8px;
-  color: var(--text-primary, #000);
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text-primary);
 }
 
+/* 入力フィールドグループ */
 .field {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--spacing-xs);
 }
 
+/* ラベル */
 .label {
-  font-size: 14px;
+  font-size: var(--font-size-sm);
   font-weight: 500;
-  color: var(--text-secondary, #666);
+  color: var(--color-text-secondary);
 }
 
+/* テキスト入力 */
 .input {
   padding: 10px 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-input);
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
 }
 
 .input:focus {
-  border-color: #333;
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
 }
 
+.input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* 送信ボタン */
 .button {
   padding: 12px;
-  background-color: #000;
-  color: #fff;
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
   border: none;
-  border-radius: 6px;
-  font-size: 16px;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s;
-  margin-top: 8px;
+  transition: background-color var(--transition-normal);
+  margin-top: var(--spacing-sm);
 }
 
 .button:hover {
-  background-color: #333;
+  background-color: var(--color-primary-hover);
 }
 
 .button:disabled {
-  background-color: #999;
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
+/* エラーメッセージ */
 .error {
-  color: #dc2626;
-  font-size: 14px;
+  color: var(--color-error-text);
+  font-size: var(--font-size-sm);
   text-align: center;
-  padding: 8px;
-  background-color: #fef2f2;
-  border-radius: 4px;
+  padding: var(--spacing-sm);
+  background-color: var(--color-error-bg);
+  border-radius: var(--radius-sm);
 }
 
+/* ログインページへのリンク */
 .link {
   text-align: center;
-  font-size: 14px;
-  color: var(--text-secondary, #666);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
 }
 
 .link a {
-  color: var(--text-primary, #000);
+  color: var(--color-primary);
   font-weight: 500;
   text-decoration: underline;
 }
 
-@media (prefers-color-scheme: dark) {
-  .form {
-    background-color: #111;
-  }
-
-  .title {
-    color: #ededed;
-  }
-
-  .label {
-    color: #999;
-  }
-
-  .input {
-    background-color: #222;
-    border-color: #444;
-    color: #ededed;
-  }
-
-  .input:focus {
-    border-color: #888;
-  }
-
-  .button {
-    background-color: #ededed;
-    color: #000;
-  }
-
-  .button:hover {
-    background-color: #ccc;
-  }
-
-  .error {
-    background-color: #450a0a;
-    color: #fca5a5;
-  }
-
-  .link {
-    color: #999;
-  }
-
-  .link a {
-    color: #ededed;
-  }
+.link a:hover {
+  color: var(--color-primary-hover);
 }
 
+/* ============================================
+   レスポンシブ: モバイル対応
+   ============================================ */
 @media (max-width: 600px) {
   .form {
-    padding: 24px;
-    margin: 0 16px;
+    padding: var(--spacing-lg);
+    margin: 0 var(--spacing-md);
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
   }
 }

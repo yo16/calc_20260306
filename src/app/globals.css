@@ -1,13 +1,122 @@
+/* ============================================
+   グローバルCSS変数定義
+   カラーパレット、タイポグラフィ、スペーシング
+   ============================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* プライマリカラー（ブルー系） */
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
+  --color-primary-light: #dbeafe;
+  --color-primary-dark: #1e40af;
+
+  /* 背景色 */
+  --color-bg: #f8fafc;
+  --color-bg-card: #ffffff;
+  --color-bg-input: #ffffff;
+
+  /* テキスト色 */
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #64748b;
+  --color-text-muted: #94a3b8;
+  --color-text-inverse: #ffffff;
+
+  /* ボーダー色 */
+  --color-border: #e2e8f0;
+  --color-border-focus: #2563eb;
+
+  /* ステータスカラー */
+  --color-error: #dc2626;
+  --color-error-bg: #fef2f2;
+  --color-error-text: #dc2626;
+  --color-success: #16a34a;
+  --color-success-bg: #f0fdf4;
+
+  /* シャドウ */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+
+  /* タイポグラフィ */
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+
+  /* スペーシング */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+
+  /* 角丸 */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* トランジション */
+  --transition-fast: 150ms ease;
+  --transition-normal: 200ms ease;
+
+  /* レイアウト */
+  --header-height: 56px;
+  --footer-height: 48px;
+  --content-max-width: 1024px;
 }
 
+/* ダークモード対応（prefers-color-schemeで自動切り替え） */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --color-primary: #3b82f6;
+    --color-primary-hover: #60a5fa;
+    --color-primary-light: #1e3a5f;
+    --color-primary-dark: #93bbfd;
+
+    --color-bg: #0f172a;
+    --color-bg-card: #1e293b;
+    --color-bg-input: #1e293b;
+
+    --color-text-primary: #f1f5f9;
+    --color-text-secondary: #94a3b8;
+    --color-text-muted: #64748b;
+    --color-text-inverse: #0f172a;
+
+    --color-border: #334155;
+    --color-border-focus: #3b82f6;
+
+    --color-error: #f87171;
+    --color-error-bg: #450a0a;
+    --color-error-text: #fca5a5;
+    --color-success: #4ade80;
+    --color-success-bg: #052e16;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
   }
+
+  html {
+    color-scheme: dark;
+  }
+}
+
+/* ============================================
+   リセットと基本スタイル
+   ============================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 html,
@@ -17,26 +126,47 @@ body {
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--color-text-primary);
+  background: var(--color-bg);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
+/* リンクの基本スタイル */
 a {
-  color: inherit;
+  color: var(--color-primary);
   text-decoration: none;
+  transition: color var(--transition-fast);
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+a:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+/* フォーカスインジケーター（アクセシビリティ） */
+:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   レスポンシブブレークポイント
+   モバイルファースト: 基本はモバイル、768px以上でデスクトップ
+   ============================================ */
+
+/* ユーティリティ: スクリーンリーダー専用テキスト */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
