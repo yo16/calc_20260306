@@ -2,6 +2,7 @@
   "permissions": {
     "allow": [
       "Bash(bd:*)",
+      "Bash(bd update:*)",
       "Bash(gh pr:*)",
       "Bash(gh api:*)",
       "Bash(git status)",
