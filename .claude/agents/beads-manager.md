@@ -30,6 +30,8 @@ model: inherit
 - 実装コードを書かない（src/, tests/ 配下のファイルを編集しない）
 - git操作をしない（commit, push, checkout等）
 - Write, Edit ツールは使用しない
+- `git checkout dev && git fetch origin && git pull origin dev && git log --oneline -5`のように、複数のコマンドをまとめて実行しない
+ - 複数のコマンドをまとめて実行すると、権限設定のパターンマッチ（`Bash(git:*)`）にマッチしないため
 
 ## 複数行テキストの扱い
 - `bd create` の `--description` に複数行テキストを渡す場合、**heredocを使わず `--body-file` を使う**

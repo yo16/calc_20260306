@@ -22,6 +22,8 @@ gitコマンドと `gh` CLIを使ってバージョン管理とPRワークフロ
 - PR作成前にテストが全パスしていることを確認する
 - force-pushは行わない
 - mainブランチには直接操作しない
+- `git checkout dev && git fetch origin && git pull origin dev && git log --oneline -5`のように、複数のコマンドをまとめて実行しない
+ - 複数のコマンドをまとめて実行すると、権限設定のパターンマッチ（`Bash(git:*)`）にマッチしないため
 
 ## ブランチ戦略
 - `main` ← `dev` ← `feature/t-xxx` の3階層
