@@ -16,7 +16,7 @@ export function handleLogout(): {
       value: "",
       options: {
         httpOnly: true,
-        secure: true,
+        secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
         path: "/",
         maxAge: 0,

@@ -18,6 +18,44 @@
   gap: var(--spacing-md);
 }
 
+/* 電卓ヘッダー: タイトルとログアウトボタンを横並び */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 電卓タイトル */
+.title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+/* ログアウトボタン */
+.logoutButton {
+  padding: var(--spacing-xs) var(--spacing-md);
+  background-color: transparent;
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.logoutButton:hover {
+  background-color: var(--color-error-bg);
+  color: var(--color-error);
+  border-color: var(--color-error);
+}
+
+.logoutButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 /* ボタングリッド全体 */
 .buttons {
   display: flex;
