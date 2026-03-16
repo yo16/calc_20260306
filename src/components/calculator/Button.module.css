@@ -1,0 +1,91 @@
+/* ============================================
+   電卓ボタンスタイル
+   variant ごとに色を分ける
+   ============================================ */
+
+/* ボタン共通スタイル */
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+  user-select: none;
+  min-height: 56px;
+}
+
+.button:hover {
+  transform: scale(1.02);
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+/* 数字ボタン（デフォルト） */
+.number {
+  background-color: var(--color-bg-card);
+  color: var(--color-text-primary);
+}
+
+.number:hover {
+  background-color: var(--color-border);
+}
+
+/* 演算子ボタン（プライマリ） */
+.operator {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  border-color: var(--color-primary);
+}
+
+.operator:hover {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+
+/* アクションボタン（C, CE）: セカンダリ */
+.action {
+  background-color: var(--color-error-bg);
+  color: var(--color-error-text);
+  border-color: var(--color-error);
+}
+
+.action:hover {
+  background-color: var(--color-error);
+  color: var(--color-text-inverse);
+}
+
+/* 等号ボタン: アクセント */
+.equal {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  border-color: var(--color-primary-dark);
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+}
+
+.equal:hover {
+  background-color: var(--color-primary-hover);
+}
+
+/* ============================================
+   レスポンシブ: モバイル対応
+   ============================================ */
+@media (max-width: 600px) {
+  .button {
+    padding: var(--spacing-sm);
+    font-size: var(--font-size-base);
+    min-height: 48px;
+  }
+
+  .equal {
+    font-size: var(--font-size-lg);
+  }
+}
