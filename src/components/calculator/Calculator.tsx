@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Display from "./Display";
 import Button from "./Button";
+import History from "./History";
+import type { HistoryItem } from "./History";
 import styles from "./Calculator.module.css";
 
 /** 電卓のボタンレイアウト定義（行ごとの配列） */
@@ -81,6 +83,8 @@ export default function Calculator() {
   const [error, setError] = useState("");
   // API通信中フラグ
   const [loading, setLoading] = useState(false);
+  // 計算履歴（クライアントstateのみ、リロードでクリア）
+  const [history, setHistory] = useState<HistoryItem[]>([]);
 
   /**
    * ボタン押下ハンドラ。
@@ -113,7 +117,13 @@ export default function Calculator() {
         if (calcResult.error) {
           setError(calcResult.error);
         } else {
-          setResult(String(calcResult.result));
+          const resultStr = String(calcResult.result);
+          setResult(resultStr);
+          // 計算成功時に履歴に追加（新しいものが先頭）
+          setHistory((prev) => [
+            { expression, result: resultStr },
+            ...prev,
+          ]);
         }
       } catch {
         setError("Communication error");
@@ -156,6 +166,9 @@ export default function Calculator() {
           </div>
         ))}
       </div>
+
+      {/* 計算履歴 */}
+      <History items={history} />
     </div>
   );
 }
