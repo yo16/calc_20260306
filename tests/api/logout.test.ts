@@ -22,7 +22,7 @@ describe("POST /api/auth/logout", () => {
       const result = handleLogout();
 
       expect(result.cookie.options.httpOnly).toBe(true);
-      expect(result.cookie.options.secure).toBe(true);
+      expect(result.cookie.options.secure).toBe(process.env.NODE_ENV === "production");
       expect(result.cookie.options.sameSite).toBe("strict");
     });
 

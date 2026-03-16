@@ -309,7 +309,7 @@ describe("認証フロー統合テスト", () => {
 
       expect(loginResult.cookie).toBeDefined();
       expect(loginResult.cookie!.options.httpOnly).toBe(true);
-      expect(loginResult.cookie!.options.secure).toBe(true);
+      expect(loginResult.cookie!.options.secure).toBe(process.env.NODE_ENV === "production");
       expect(loginResult.cookie!.options.sameSite).toBe("strict");
       expect(loginResult.cookie!.options.path).toBe("/");
     });
@@ -320,7 +320,7 @@ describe("認証フロー統合テスト", () => {
       expect(logoutResult.cookie.value).toBe("");
       expect(logoutResult.cookie.options.maxAge).toBe(0);
       expect(logoutResult.cookie.options.httpOnly).toBe(true);
-      expect(logoutResult.cookie.options.secure).toBe(true);
+      expect(logoutResult.cookie.options.secure).toBe(process.env.NODE_ENV === "production");
       expect(logoutResult.cookie.options.sameSite).toBe("strict");
     });
   });

@@ -170,7 +170,8 @@ export default function Calculator() {
     try {
       const logoutResult = await submitLogout();
       if (logoutResult.success) {
-        router.push("/login");
+        // ログアウト後はcookie削除を反映するためフルページナビゲーション
+        window.location.href = "/login";
       } else {
         setError(logoutResult.error || "Logout failed");
       }

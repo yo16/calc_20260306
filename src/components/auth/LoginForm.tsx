@@ -73,8 +73,9 @@ export default function LoginForm() {
       const result = await submitLogin(username, password);
 
       if (result.success) {
-        // ログイン成功時は電卓ページへ遷移
-        router.push("/calculator");
+        // ログイン成功時は電卓ページへフルページナビゲーション
+        // router.pushではRSC fetchでcookieが送信されないため
+        window.location.href = "/calculator";
       } else {
         setError(result.error || "Login failed");
       }
