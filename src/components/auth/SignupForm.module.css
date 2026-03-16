@@ -1,0 +1,148 @@
+.container {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-geist-sans);
+  background-color: var(--background);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+  background-color: var(--foreground, #fff);
+  border-radius: 8px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 8px;
+  color: var(--text-primary, #000);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary, #666);
+}
+
+.input {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  border-color: #333;
+}
+
+.button {
+  padding: 12px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 8px;
+}
+
+.button:hover {
+  background-color: #333;
+}
+
+.button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #dc2626;
+  font-size: 14px;
+  text-align: center;
+  padding: 8px;
+  background-color: #fef2f2;
+  border-radius: 4px;
+}
+
+.link {
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-secondary, #666);
+}
+
+.link a {
+  color: var(--text-primary, #000);
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+@media (prefers-color-scheme: dark) {
+  .form {
+    background-color: #111;
+  }
+
+  .title {
+    color: #ededed;
+  }
+
+  .label {
+    color: #999;
+  }
+
+  .input {
+    background-color: #222;
+    border-color: #444;
+    color: #ededed;
+  }
+
+  .input:focus {
+    border-color: #888;
+  }
+
+  .button {
+    background-color: #ededed;
+    color: #000;
+  }
+
+  .button:hover {
+    background-color: #ccc;
+  }
+
+  .error {
+    background-color: #450a0a;
+    color: #fca5a5;
+  }
+
+  .link {
+    color: #999;
+  }
+
+  .link a {
+    color: #ededed;
+  }
+}
+
+@media (max-width: 600px) {
+  .form {
+    padding: 24px;
+    margin: 0 16px;
+  }
+}
