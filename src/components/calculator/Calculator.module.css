@@ -1,0 +1,63 @@
+/* ============================================
+   電卓メインコンポーネントスタイル
+   レイアウト、ボタングリッド、エラー表示
+   ============================================ */
+
+/* 電卓コンテナ */
+.calculator {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+/* ボタングリッド全体 */
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+/* ボタン行 */
+.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  gap: var(--spacing-sm);
+}
+
+/* エラーメッセージ表示 */
+.error {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--color-error-bg);
+  color: var(--color-error-text);
+  border: 1px solid var(--color-error);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  text-align: center;
+}
+
+/* ローディング表示 */
+.loading {
+  padding: var(--spacing-sm);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  text-align: center;
+}
+
+/* ============================================
+   レスポンシブ: モバイル対応
+   ============================================ */
+@media (max-width: 600px) {
+  .calculator {
+    max-width: 100%;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+  }
+}
