@@ -28,7 +28,11 @@
       "Bash(npx --prefix D:/Public/github/yo16/calc_20260306 next lint 2>&1 | head -30)",
       "Bash(npx eslint:*)",
       "Bash(npx tsc:*)",
-      "Bash(npm ls:*)"
+      "Bash(npm ls:*)",
+      "Read(.claude/tmp/**)",
+      "Write(.claude/tmp/**)",
+      "Edit(.claude/tmp/**)",
+      "Bash(ls .claude/tmp:*)"
     ]
   },
   "enabledMcpjsonServers": [
