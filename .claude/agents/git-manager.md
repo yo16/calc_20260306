@@ -37,20 +37,19 @@ gitコマンドと `gh` CLIを使ってバージョン管理とPRワークフロ
 - BeadsIDをコミットメッセージに含める（例: `feat(t-abc): 計算エンジンの実装`）
 - Co-Authored-By ヘッダーを付与
 
+## 複数行テキストの扱い
+- `gh pr create` の `--body` に複数行テキストを渡す場合、**heredocを使わず `--body-file` を使う**
+- 手順:
+  1. `.claude/tmp/` ディレクトリに一時ファイルを書き出す（例: `.claude/tmp/pr-body.md`）
+  2. `gh pr create --body-file .claude/tmp/pr-body.md ...` で実行
+  3. 実行後に一時ファイルを削除する
+- 理由: heredocによる複数行コマンドは権限設定のパターンマッチ（`Bash(gh pr:*)`）にマッチしないため
+
 ## PR作成
 ```bash
-gh pr create --base dev --title "<タイトル>" --body "$(cat <<'EOF'
-## Summary
-- <変更内容>
-
-## Beads Task
-- ID: <BeadsID>
-- Title: <タスクタイトル>
-
-## Test Results
-- All tests passed
-
-Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
-EOF
-)"
+# 1. PR本文を一時ファイルに書き出す（Write ツールで .claude/tmp/pr-body.md を作成）
+# 2. PR作成（単一行コマンド）
+gh pr create --base dev --title "<タイトル>" --body-file .claude/tmp/pr-body.md
+# 3. 一時ファイル削除
+rm .claude/tmp/pr-body.md
 ```

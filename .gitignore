@@ -140,3 +140,6 @@ vite.config.ts.timestamp-*
 
 # Local data storage
 data/
+
+# Claude Code temporary files
+.claude/tmp/

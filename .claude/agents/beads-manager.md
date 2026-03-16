@@ -31,14 +31,23 @@ model: inherit
 - git操作をしない（commit, push, checkout等）
 - Write, Edit ツールは使用しない
 
+## 複数行テキストの扱い
+- `bd create` の `--description` に複数行テキストを渡す場合、**heredocを使わず `--body-file` を使う**
+- 手順:
+  1. `.claude/tmp/` ディレクトリに一時ファイルを書き出す（例: `.claude/tmp/desc.md`）
+  2. `bd create --body-file .claude/tmp/desc.md ...` で実行
+  3. 実行後に一時ファイルを削除する
+- 理由: heredocによる複数行コマンドは権限設定のパターンマッチ（`Bash(bd:*)`）にマッチしないため
+- `--notes` など `--body-file` が使えないオプションの場合は、改行を含めず1行で記述する
+
 ## 主要コマンド
 ```bash
 bd show <id> --json          # タスク詳細取得
 bd update <id> --status <s>  # ステータス更新
-bd update <id> --notes "..." # notes更新
+bd update <id> --notes "..." # notes更新（1行で記述）
 bd update <id> --add-label <label>  # ラベル追加
 bd close <id>                # タスククローズ
-bd create "<title>" --description "..." --notes "..." --parent <id>  # 新タスク作成
+bd create "<title>" --body-file <file> --notes "..." --parent <id>  # 新タスク作成（descriptionはファイルから）
 bd dep add <blocked> <blocker>    # 依存関係追加
 bd dep remove <blocked> <blocker> # 依存関係削除
 bd dep list <id> --json           # 依存関係一覧
