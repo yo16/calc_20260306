@@ -1,0 +1,81 @@
+/* ============================================
+   計算履歴コンポーネントスタイル
+   履歴リスト、各アイテム、空メッセージ
+   ============================================ */
+
+/* 履歴セクション全体 */
+.history {
+  width: 100%;
+  padding: var(--spacing-md);
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+/* セクションタイトル */
+.title {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* 履歴が空の場合のメッセージ */
+.empty {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  text-align: center;
+  padding: var(--spacing-md) 0;
+}
+
+/* 履歴リスト */
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* 各履歴アイテム */
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  font-family: var(--font-mono);
+  background-color: var(--color-bg);
+  transition: background-color var(--transition-fast);
+}
+
+.item:hover {
+  background-color: var(--color-primary-light);
+}
+
+/* 数式部分 */
+.expression {
+  color: var(--color-text-secondary);
+  flex-shrink: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* イコール記号 */
+.equals {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+/* 結果部分 */
+.result {
+  color: var(--color-text-primary);
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-left: auto;
+}
