@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Display from "./Display";
 import Button from "./Button";
 import History from "./History";
@@ -71,10 +72,31 @@ export async function fetchCalculation(
 }
 
 /**
+ * ログアウトAPIにリクエストを送信する。
+ */
+export async function submitLogout(
+  fetchFn: typeof fetch = fetch
+): Promise<{ success: boolean; error?: string }> {
+  const response = await fetchFn("/api/auth/logout", {
+    method: "POST",
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    const data = await response.json();
+    return { success: false, error: data.error || "Logout failed" };
+  }
+
+  return { success: true };
+}
+
+/**
  * 電卓メインコンポーネント。
  * Display、Buttonを組み合わせ、計算APIへの送信と結果表示を行う。
+ * ログアウトボタンも含む。
  */
 export default function Calculator() {
+  const router = useRouter();
   // 入力中の数式
   const [expression, setExpression] = useState("");
   // 計算結果（表示用文字列）
@@ -85,6 +107,8 @@ export default function Calculator() {
   const [loading, setLoading] = useState(false);
   // 計算履歴（クライアントstateのみ、リロードでクリア）
   const [history, setHistory] = useState<HistoryItem[]>([]);
+  // ログアウト処理中フラグ
+  const [loggingOut, setLoggingOut] = useState(false);
 
   /**
    * ボタン押下ハンドラ。
@@ -137,8 +161,41 @@ export default function Calculator() {
     setExpression((prev) => appendToExpression(prev, label));
   };
 
+  /**
+   * ログアウトボタン押下ハンドラ。
+   * ログアウトAPIを呼び出し、成功時はログインページへ遷移する。
+   */
+  const handleLogout = async () => {
+    setLoggingOut(true);
+    try {
+      const logoutResult = await submitLogout();
+      if (logoutResult.success) {
+        router.push("/login");
+      } else {
+        setError(logoutResult.error || "Logout failed");
+      }
+    } catch {
+      setError("Logout failed");
+    } finally {
+      setLoggingOut(false);
+    }
+  };
+
   return (
     <div className={styles.calculator}>
+      {/* ヘッダー: タイトルとログアウトボタン */}
+      <div className={styles.header}>
+        <h1 className={styles.title}>Calculator</h1>
+        <button
+          className={styles.logoutButton}
+          onClick={handleLogout}
+          disabled={loggingOut}
+          type="button"
+        >
+          {loggingOut ? "Logging out..." : "Logout"}
+        </button>
+      </div>
+
       {/* ディスプレイ: 数式と結果を表示 */}
       <Display expression={expression} result={result} />
 
