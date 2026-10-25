@@ -36,6 +36,7 @@ model: inherit
 - コンポーネント: PascalCase（例: `Calculator.tsx`）
 - 関数・変数: camelCase
 - 型・インターフェース: PascalCase
+- ある程度の処理の塊ごとに、処理の概要を日本語のコメントで書いてください
 
 ## セキュリティ制約
 - `eval()` は絶対に使用しない

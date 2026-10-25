@@ -16,3 +16,13 @@ export interface CreateUserInput {
   username: string;
   passwordHash: string;
 }
+
+/**
+ * Decoded JWT payload returned by verifyToken.
+ */
+export interface JwtPayload {
+  userId: string;
+  email: string;
+  iat: number;
+  exp: number;
+}

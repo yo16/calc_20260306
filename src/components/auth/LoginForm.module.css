@@ -1,0 +1,135 @@
+/* ============================================
+   ログインフォームスタイル
+   グローバルCSS変数を使用してテーマ整合性を確保
+   SignupFormと統一感のあるデザイン
+   ============================================ */
+
+/* フォームコンテナ: 画面中央に配置 */
+.container {
+  display: flex;
+  min-height: calc(100vh - var(--header-height) - var(--footer-height) - var(--spacing-lg) * 2);
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+}
+
+/* フォーム本体: カードスタイル */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
+  max-width: 400px;
+  padding: var(--spacing-2xl) var(--spacing-xl);
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+/* フォームタイトル */
+.title {
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text-primary);
+}
+
+/* 入力フィールドグループ */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+/* ラベル */
+.label {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+/* テキスト入力 */
+.input {
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-input);
+  outline: none;
+  transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.input:focus {
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* 送信ボタン */
+.button {
+  padding: 12px;
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--transition-normal);
+  margin-top: var(--spacing-sm);
+}
+
+.button:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* エラーメッセージ */
+.error {
+  color: var(--color-error-text);
+  font-size: var(--font-size-sm);
+  text-align: center;
+  padding: var(--spacing-sm);
+  background-color: var(--color-error-bg);
+  border-radius: var(--radius-sm);
+}
+
+/* サインアップページへのリンク */
+.link {
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.link a {
+  color: var(--color-primary);
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.link a:hover {
+  color: var(--color-primary-hover);
+}
+
+/* ============================================
+   レスポンシブ: モバイル対応
+   ============================================ */
+@media (max-width: 600px) {
+  .form {
+    padding: var(--spacing-lg);
+    margin: 0 var(--spacing-md);
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+  }
+}

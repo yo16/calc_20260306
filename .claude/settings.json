@@ -17,7 +17,11 @@
       "Bash(npm run build:*)",
       "Bash(npm run start:*)",
       "Bash(npm run dev:*)",
-      "Bash(npx jest:*)"
+      "Bash(npx jest:*)",
+      "Read(.claude/tmp/**)",
+      "Write(.claude/tmp/**)",
+      "Edit(.claude/tmp/**)",
+      "Bash(ls .claude/tmp:*)"
     ]
   },
   "enabledPlugins": {

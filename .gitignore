@@ -140,3 +140,10 @@ vite.config.ts.timestamp-*
 
 # Local data storage
 data/
+
+# Claude Code temporary files
+.claude/tmp/
+
+# bd (beads) 1.3.2 runtime files
+*.gate.lock*
+.beads-credential-key
