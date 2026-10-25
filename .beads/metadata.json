@@ -1,4 +1,7 @@
 {
-  "database": "beads.db",
-  "jsonl_export": "issues.jsonl"
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "t",
+  "project_id": "519c34d8-33bd-4011-b5d9-4d00b6ff7c8b"
 }
